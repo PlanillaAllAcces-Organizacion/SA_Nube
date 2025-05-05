@@ -1,7 +1,19 @@
+using GRUPO_01_SubirArchivosNube.AppWebMVC.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+//Configuración con google drive mediante las credenciales
+builder.Services.AddScoped<GoogleDriveService>(provider =>
+{
+    var configuration = provider.GetRequiredService<IConfiguration>();
+    return new GoogleDriveService(
+        configuration["GoogleDrive:ClientId"],
+        configuration["GoogleDrive:ClientSecret"]);
+});
 
 var app = builder.Build();
 
