@@ -7,13 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\Archivos\**" />
-    <Content Remove="Views\Archivos\**" />
-    <EmbeddedResource Remove="Views\Archivos\**" />
-    <None Remove="Views\Archivos\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Google.Apis.Auth" Version="1.69.0" />
     <PackageReference Include="Google.Apis.Core" Version="1.69.0" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.69.0.3740" />
