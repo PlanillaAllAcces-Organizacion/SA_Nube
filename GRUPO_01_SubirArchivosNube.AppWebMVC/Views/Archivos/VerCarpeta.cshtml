@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewData["Title"] = "VerCarpeta";
+}
+
+
+<h1>VerCarpeta</h1>
+
+@model IList<GoogleDrive>
+@{
+    ViewData["Title"] = "Archivos en Carpeta";
+}
+
+<h2 class="text-center my-4">
+    <i class="fas fa-folder-open"></i> Archivos en la carpeta
+</h2>
+
+<!-- Botón para regresar a la vista de Crear Carpeta -->
+<a asp-action="CrearCarpeta" class="btn btn-outline-primary mb-3">
+    <i class="fas fa-arrow-left"></i> Volver a Crear Carpeta
+</a>
+
+<!-- Tabla de archivos quqe se encuentran dentro de una carpetaa -->
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>ID</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var archivo in Model)
+            {
+                <div class="d-flex justify-content-between w-100">
+                <tr>
+                    <td><i class="fas fa-file"></i> @archivo.Nombre</td>
+                    <td>@archivo.Id</td>
+
+                    <!-- Botón para visualizar o descargar archivos -->
+                    <td>
+                        <a href="@archivo.Url" class="btn btn-primary btn-sm" target="_blank">
+                            <i class="fas fa-download"></i> Abrir
+                        </a>
+
+                        <!-- Botón de eliminar archivos -->
+                        <form asp-action="EliminarArchivo" method="post" style="display:inline;">
+                            <input type="hidden" name="fileId" value="@archivo.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </div>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="text-center text-muted">No hay archivos en esta carpeta.</p>
+}
+
+
